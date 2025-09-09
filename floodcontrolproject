@@ -1,0 +1,52 @@
+insert into flood_control_projects (
+project_name, 
+location, 
+region, 
+implementing_agency, 
+budget_amount, 
+funding_source, 
+start_date, 
+end_date, 
+status,
+remarks 
+) 
+VALUES(
+'Improvement along Balanti Creek, Brgy. Concepcion Dos, Marikina City, Phase 1',
+'Brgy. Concepcion Dos, Marikina City',
+'National Capital Region (NCR)',
+'729 Construction, Inc. (Formerly 722 Construction, Inc.)',
+48001608,
+'Government Appropriation',
+'2024-04-01',
+'2025-03-03',
+'Failed/Problematic',
+'Project flagged in official report'
+);
+
+
+alter table flood_control_projects
+alter column funding_source TYPE TEXT
+using funding_source::TEXT,
+ALTER COLUMN funding_source SET NOT NULL;
+
+
+
+select * from flood_control_projects;
+
+--1. List all projects in Region III
+select * from flood_control_projects where region = 'Region III';
+
+
+--2. Show the project_name, budget_amount, and status of projects located in Marikina City
+select project_name, budget_amount, status from flood_control_projects where location ilike '%Marikina City%';
+
+--Filtering and Conditions
+
+--1. Find all projects with amount > 100m
+select * from flood_control_projects where budget_amount > 100000000;
+
+--2. Get projects with ongoing status
+select * from flood_control_projects where status LIKE '%ongoing%';
+
+--3. Sort the projects by budget_amount
+select * from flood_control_projects ORDER BY budget_amount;
