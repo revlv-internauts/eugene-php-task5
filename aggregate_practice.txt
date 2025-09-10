@@ -1,0 +1,76 @@
+CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    employee_name VARCHAR(100),
+    department VARCHAR(50),
+    region VARCHAR(50),
+    sale_date DATE,
+    product_category VARCHAR(50),
+    quantity INTEGER,
+    unit_price DECIMAL(10,2),
+    total_amount DECIMAL(10,2)
+);
+
+INSERT INTO sales (employee_name, department, region, sale_date, product_category, quantity, unit_price, total_amount) VALUES
+('Alice Johnson', 'Electronics', 'North', '2024-01-15', 'Laptops', 2, 899.99, 1799.98),
+('Bob Smith', 'Electronics', 'South', '2024-01-16', 'Smartphones', 5, 649.99, 3249.95),
+('Carol Davis', 'Clothing', 'East', '2024-01-17', 'Shirts', 10, 29.99, 299.90),
+('David Wilson', 'Electronics', 'North', '2024-01-18', 'Tablets', 3, 399.99, 1199.97),
+('Eve Brown', 'Clothing', 'West', '2024-01-19', 'Jeans', 7, 79.99, 559.93),
+('Frank Miller', 'Books', 'South', '2024-01-20', 'Fiction', 15, 14.99, 224.85),
+('Grace Lee', 'Electronics', 'East', '2024-01-21', 'Laptops', 1, 1299.99, 1299.99),
+('Henry Taylor', 'Clothing', 'North', '2024-01-22', 'Shoes', 4, 89.99, 359.96),
+('Ivy Chen', 'Books', 'West', '2024-01-23', 'Non-fiction', 8, 19.99, 159.92),
+('Jack Anderson', 'Electronics', 'South', '2024-01-24', 'Smartphones', 3, 749.99, 2249.97),
+('Kate Rodriguez', 'Clothing', 'East', '2024-01-25', 'Dresses', 6, 59.99, 359.94),
+('Liam Thompson', 'Books', 'North', '2024-01-26', 'Textbooks', 12, 89.99, 1079.88),
+('Mia Garcia', 'Electronics', 'West', '2024-01-27', 'Headphones', 8, 149.99, 1199.92),
+('Noah Martinez', 'Clothing', 'South', '2024-01-28', 'Jackets', 3, 129.99, 389.97),
+('Olivia White', 'Books', 'East', '2024-01-29', 'Children', 20, 9.99, 199.80),
+('Paul Harris', 'Electronics', 'North', '2024-01-30', 'Cameras', 2, 549.99, 1099.98),
+('Quinn Clark', 'Clothing', 'West', '2024-02-01', 'Accessories', 15, 19.99, 299.85),
+('Rachel Lewis', 'Books', 'South', '2024-02-02', 'Science', 6, 34.99, 209.94),
+('Sam Walker', 'Electronics', 'East', '2024-02-03', 'Gaming', 4, 299.99, 1199.96),
+('Tina Hall', 'Clothing', 'North', '2024-02-04', 'Sportswear', 9, 39.99, 359.91);
+
+
+select * from sales;
+
+--task 1 - Find out how many total sales transactions the company has made and what the overall revenue is.
+select count(*), 
+sum(total_amount)
+from sales;
+
+--task 2 - What's the average unit price across all products? Also find the cheapest and most expensive unit prices in the dataset.
+select avg(unit_price) as average_price, 
+min(unit_price) as pinakamura,
+max(unit_price) as pinakamahal
+from sales;
+
+--task 3 - Calculate the total number of items sold across all transactions. What's the average quantity per transaction?
+select sum(quantity),
+avg(quantity)
+from sales;
+
+--task 4 - Determine the date range of your sales data - when was the first sale and when was the last sale recorded?
+select min(sale_date) as First_Sale,
+max(sale_date) as Latest_Sale
+from sales;
+
+--task 5 - Find the highest single transaction amount and the lowest single transaction amount. What's the average transaction value?
+select max(total_amount),
+min(total_amount),
+avg(total_amount)
+from sales;
+
+--task 6 - How many different product categories does the company sell? 
+select
+count(distinct (product_category)) as DISTINCT_PRODUCT_CATEGORY
+from sales;
+
+--task 7 - Count how many unique departments exist in the company.
+select count(distinct (department)) as DISTINCT_DEPARTMENTS
+from sales;
+
+--task 8 - How many different regions is the company operating in?
+select count(distinct (region)) as DISTINCT_REGION
+from sales;
